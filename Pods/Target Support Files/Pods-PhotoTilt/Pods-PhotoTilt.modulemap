@@ -1,0 +1,6 @@
+framework module Pods_PhotoTilt {
+  umbrella header "Pods-PhotoTilt-umbrella.h"
+
+  export *
+  module * { export * }
+}

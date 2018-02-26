@@ -7,21 +7,53 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		176A35B85E0B07AF98547BB1 /* Pods_PhotoTilt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 274C5487F94D124849E5397E /* Pods_PhotoTilt.framework */; };
+		B81440432042530300EDB3EB /* RangeSeekSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81440422042530300EDB3EB /* RangeSeekSlider.swift */; };
+		B81440452043B60F00EDB3EB /* EditingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B81440442043B60F00EDB3EB /* EditingView.swift */; };
+		B82533D3203BC07B001685C4 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82533CF203BC07A001685C4 /* UIImageExtension.swift */; };
+		B82533D4203BC07B001685C4 /* CIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82533D0203BC07A001685C4 /* CIImageExtension.swift */; };
+		B82533D5203BC07B001685C4 /* CVPixelBufferExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82533D1203BC07A001685C4 /* CVPixelBufferExtension.swift */; };
+		B82533D6203BC07B001685C4 /* CGImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82533D2203BC07B001685C4 /* CGImageExtension.swift */; };
+		B82533D9203BC12B001685C4 /* DepthImageFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82533D8203BC12B001685C4 /* DepthImageFilters.swift */; };
+		B82533E3203E6462001685C4 /* PassThrough.metal in Sources */ = {isa = PBXBuildFile; fileRef = B82533E2203E6461001685C4 /* PassThrough.metal */; };
 		B83CF103202EBACC00B68AE4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83CF102202EBACC00B68AE4 /* AppDelegate.swift */; };
-		B83CF105202EBACC00B68AE4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83CF104202EBACC00B68AE4 /* ViewController.swift */; };
-		B83CF108202EBACC00B68AE4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B83CF106202EBACC00B68AE4 /* Main.storyboard */; };
+		B83CF105202EBACC00B68AE4 /* CaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83CF104202EBACC00B68AE4 /* CaptureViewController.swift */; };
 		B83CF10A202EBACC00B68AE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B83CF109202EBACC00B68AE4 /* Assets.xcassets */; };
 		B83CF10D202EBACC00B68AE4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B83CF10B202EBACC00B68AE4 /* LaunchScreen.storyboard */; };
+		B83CF115202F5B9A00B68AE4 /* CaptureButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83CF114202F5B9A00B68AE4 /* CaptureButton.swift */; };
+		B83CF117202F5BB300B68AE4 /* UIView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83CF116202F5BB300B68AE4 /* UIView+Utils.swift */; };
+		B83CF11B2033AD2C00B68AE4 /* CaptureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83CF11A2033AD2C00B68AE4 /* CaptureView.swift */; };
+		B83CF11D2033B1CF00B68AE4 /* FilterRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83CF11C2033B1CF00B68AE4 /* FilterRenderer.swift */; };
+		B83CF1212033B1F600B68AE4 /* minMaxFromBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = B83CF1202033B1F600B68AE4 /* minMaxFromBuffer.m */; };
+		B8918BD22033F0AB00289800 /* EditingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8918BD12033F0AB00289800 /* EditingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		274C5487F94D124849E5397E /* Pods_PhotoTilt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhotoTilt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A32A56A2FC243770D106C0D5 /* Pods-PhotoTilt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoTilt.release.xcconfig"; path = "Pods/Target Support Files/Pods-PhotoTilt/Pods-PhotoTilt.release.xcconfig"; sourceTree = "<group>"; };
+		B81440422042530300EDB3EB /* RangeSeekSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeSeekSlider.swift; sourceTree = "<group>"; };
+		B81440442043B60F00EDB3EB /* EditingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingView.swift; sourceTree = "<group>"; };
+		B82533CF203BC07A001685C4 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
+		B82533D0203BC07A001685C4 /* CIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CIImageExtension.swift; sourceTree = "<group>"; };
+		B82533D1203BC07A001685C4 /* CVPixelBufferExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CVPixelBufferExtension.swift; sourceTree = "<group>"; };
+		B82533D2203BC07B001685C4 /* CGImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGImageExtension.swift; sourceTree = "<group>"; };
+		B82533D8203BC12B001685C4 /* DepthImageFilters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DepthImageFilters.swift; sourceTree = "<group>"; };
+		B82533E2203E6461001685C4 /* PassThrough.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = PassThrough.metal; sourceTree = "<group>"; };
 		B83CF0FF202EBACC00B68AE4 /* PhotoTilt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoTilt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B83CF102202EBACC00B68AE4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B83CF104202EBACC00B68AE4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		B83CF107202EBACC00B68AE4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B83CF104202EBACC00B68AE4 /* CaptureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureViewController.swift; sourceTree = "<group>"; };
 		B83CF109202EBACC00B68AE4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B83CF10C202EBACC00B68AE4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B83CF10E202EBACC00B68AE4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B83CF114202F5B9A00B68AE4 /* CaptureButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureButton.swift; sourceTree = "<group>"; };
+		B83CF116202F5BB300B68AE4 /* UIView+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Utils.swift"; sourceTree = "<group>"; };
+		B83CF11A2033AD2C00B68AE4 /* CaptureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureView.swift; sourceTree = "<group>"; };
+		B83CF11C2033B1CF00B68AE4 /* FilterRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterRenderer.swift; sourceTree = "<group>"; };
+		B83CF11E2033B1F400B68AE4 /* PhotoTilt-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PhotoTilt-Bridging-Header.h"; sourceTree = "<group>"; };
+		B83CF11F2033B1F600B68AE4 /* minMaxFromBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = minMaxFromBuffer.h; sourceTree = "<group>"; };
+		B83CF1202033B1F600B68AE4 /* minMaxFromBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = minMaxFromBuffer.m; sourceTree = "<group>"; };
+		B8918BD12033F0AB00289800 /* EditingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingViewController.swift; sourceTree = "<group>"; };
+		EDBFD36D51FE19FEDD87E8D5 /* Pods-PhotoTilt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoTilt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PhotoTilt/Pods-PhotoTilt.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +61,56 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				176A35B85E0B07AF98547BB1 /* Pods_PhotoTilt.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2413015981931F110B785DDC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EDBFD36D51FE19FEDD87E8D5 /* Pods-PhotoTilt.debug.xcconfig */,
+				A32A56A2FC243770D106C0D5 /* Pods-PhotoTilt.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		A8F5509D2A8D1389162EFFB4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				274C5487F94D124849E5397E /* Pods_PhotoTilt.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B82533CE203BC067001685C4 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B82533D2203BC07B001685C4 /* CGImageExtension.swift */,
+				B82533D0203BC07A001685C4 /* CIImageExtension.swift */,
+				B82533D1203BC07A001685C4 /* CVPixelBufferExtension.swift */,
+				B82533CF203BC07A001685C4 /* UIImageExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		B82533D7203BC0A1001685C4 /* Image Manipulation */ = {
+			isa = PBXGroup;
+			children = (
+				B82533D8203BC12B001685C4 /* DepthImageFilters.swift */,
+			);
+			path = "Image Manipulation";
+			sourceTree = "<group>";
+		};
 		B83CF0F6202EBACC00B68AE4 = {
 			isa = PBXGroup;
 			children = (
 				B83CF101202EBACC00B68AE4 /* PhotoTilt */,
 				B83CF100202EBACC00B68AE4 /* Products */,
+				2413015981931F110B785DDC /* Pods */,
+				A8F5509D2A8D1389162EFFB4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,12 +125,24 @@
 		B83CF101202EBACC00B68AE4 /* PhotoTilt */ = {
 			isa = PBXGroup;
 			children = (
+				B82533D7203BC0A1001685C4 /* Image Manipulation */,
+				B82533CE203BC067001685C4 /* Extensions */,
 				B83CF102202EBACC00B68AE4 /* AppDelegate.swift */,
-				B83CF104202EBACC00B68AE4 /* ViewController.swift */,
-				B83CF106202EBACC00B68AE4 /* Main.storyboard */,
+				B83CF104202EBACC00B68AE4 /* CaptureViewController.swift */,
+				B83CF11A2033AD2C00B68AE4 /* CaptureView.swift */,
+				B8918BD12033F0AB00289800 /* EditingViewController.swift */,
+				B81440442043B60F00EDB3EB /* EditingView.swift */,
+				B83CF114202F5B9A00B68AE4 /* CaptureButton.swift */,
+				B83CF116202F5BB300B68AE4 /* UIView+Utils.swift */,
+				B81440422042530300EDB3EB /* RangeSeekSlider.swift */,
 				B83CF109202EBACC00B68AE4 /* Assets.xcassets */,
 				B83CF10B202EBACC00B68AE4 /* LaunchScreen.storyboard */,
 				B83CF10E202EBACC00B68AE4 /* Info.plist */,
+				B83CF11C2033B1CF00B68AE4 /* FilterRenderer.swift */,
+				B83CF11F2033B1F600B68AE4 /* minMaxFromBuffer.h */,
+				B83CF1202033B1F600B68AE4 /* minMaxFromBuffer.m */,
+				B82533E2203E6461001685C4 /* PassThrough.metal */,
+				B83CF11E2033B1F400B68AE4 /* PhotoTilt-Bridging-Header.h */,
 			);
 			path = PhotoTilt;
 			sourceTree = "<group>";
@@ -71,9 +154,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B83CF111202EBACC00B68AE4 /* Build configuration list for PBXNativeTarget "PhotoTilt" */;
 			buildPhases = (
+				4D78ED86A5212F27C217AD6B /* [CP] Check Pods Manifest.lock */,
 				B83CF0FB202EBACC00B68AE4 /* Sources */,
 				B83CF0FC202EBACC00B68AE4 /* Frameworks */,
 				B83CF0FD202EBACC00B68AE4 /* Resources */,
+				69E0FF312B16DFC717019B11 /* [CP] Embed Pods Frameworks */,
+				75CD6A5451FD22112F5420F1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -96,6 +182,7 @@
 				TargetAttributes = {
 					B83CF0FE202EBACC00B68AE4 = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -125,33 +212,92 @@
 			files = (
 				B83CF10D202EBACC00B68AE4 /* LaunchScreen.storyboard in Resources */,
 				B83CF10A202EBACC00B68AE4 /* Assets.xcassets in Resources */,
-				B83CF108202EBACC00B68AE4 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4D78ED86A5212F27C217AD6B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PhotoTilt-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		69E0FF312B16DFC717019B11 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-PhotoTilt/Pods-PhotoTilt-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/RangeSeekSlider/RangeSeekSlider.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RangeSeekSlider.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PhotoTilt/Pods-PhotoTilt-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		75CD6A5451FD22112F5420F1 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PhotoTilt/Pods-PhotoTilt-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B83CF0FB202EBACC00B68AE4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B83CF105202EBACC00B68AE4 /* ViewController.swift in Sources */,
+				B82533D5203BC07B001685C4 /* CVPixelBufferExtension.swift in Sources */,
+				B83CF105202EBACC00B68AE4 /* CaptureViewController.swift in Sources */,
+				B8918BD22033F0AB00289800 /* EditingViewController.swift in Sources */,
+				B82533D3203BC07B001685C4 /* UIImageExtension.swift in Sources */,
+				B82533D4203BC07B001685C4 /* CIImageExtension.swift in Sources */,
+				B83CF115202F5B9A00B68AE4 /* CaptureButton.swift in Sources */,
+				B83CF11D2033B1CF00B68AE4 /* FilterRenderer.swift in Sources */,
+				B82533D6203BC07B001685C4 /* CGImageExtension.swift in Sources */,
+				B82533E3203E6462001685C4 /* PassThrough.metal in Sources */,
+				B83CF117202F5BB300B68AE4 /* UIView+Utils.swift in Sources */,
+				B83CF1212033B1F600B68AE4 /* minMaxFromBuffer.m in Sources */,
+				B81440452043B60F00EDB3EB /* EditingView.swift in Sources */,
+				B81440432042530300EDB3EB /* RangeSeekSlider.swift in Sources */,
 				B83CF103202EBACC00B68AE4 /* AppDelegate.swift in Sources */,
+				B82533D9203BC12B001685C4 /* DepthImageFilters.swift in Sources */,
+				B83CF11B2033AD2C00B68AE4 /* CaptureView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		B83CF106202EBACC00B68AE4 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B83CF107202EBACC00B68AE4 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		B83CF10B202EBACC00B68AE4 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -272,13 +418,19 @@
 		};
 		B83CF112202EBACC00B68AE4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EDBFD36D51FE19FEDD87E8D5 /* Pods-PhotoTilt.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4BUN42Y2G7;
 				INFOPLIST_FILE = PhotoTilt/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zaid.PhotoTilt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "PhotoTilt/PhotoTilt-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -286,13 +438,18 @@
 		};
 		B83CF113202EBACC00B68AE4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A32A56A2FC243770D106C0D5 /* Pods-PhotoTilt.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4BUN42Y2G7;
 				INFOPLIST_FILE = PhotoTilt/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zaid.PhotoTilt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "PhotoTilt/PhotoTilt-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
