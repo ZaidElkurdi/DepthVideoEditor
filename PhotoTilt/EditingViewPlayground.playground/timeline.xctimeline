@@ -3,7 +3,18 @@
    version = "3.0">
    <TimelineItems>
       <LoggerValueHistoryTimelineItem
-         documentLocation = "file:///Users/Zaid/Desktop/Programming/PhotoTilt/PhotoTilt/PhotoTilt/EditingViewPlayground.playground#CharacterRangeLen=43&amp;CharacterRangeLoc=1527&amp;EndingColumnNumber=0&amp;EndingLineNumber=56&amp;StartingColumnNumber=0&amp;StartingLineNumber=55&amp;Timestamp=541311705.475884"
+         documentLocation = "file:///Users/Zaid/Desktop/Programming/PhotoTilt/PhotoTilt/PhotoTilt/EditingViewPlayground.playground#CharacterRangeLen=19501&amp;CharacterRangeLoc=0&amp;EndingColumnNumber=18&amp;EndingLineNumber=538&amp;StartingColumnNumber=0&amp;StartingLineNumber=0&amp;Timestamp=541398534.1221499"
+         selectedRepresentationIndex = "0"
+         shouldTrackSuperviewWidth = "NO">
+      </LoggerValueHistoryTimelineItem>
+      <LoggerValueHistoryTimelineItem
+         documentLocation = "file:///Users/Zaid/Desktop/Programming/PhotoTilt/PhotoTilt/PhotoTilt/EditingViewPlayground.playground#CharacterRangeLen=19053&amp;CharacterRangeLoc=142&amp;EndingColumnNumber=20&amp;EndingLineNumber=528&amp;StartingColumnNumber=0&amp;StartingLineNumber=11&amp;Timestamp=541398534.122335"
+         lockedSize = "{225, 68}"
+         selectedRepresentationIndex = "0"
+         shouldTrackSuperviewWidth = "NO">
+      </LoggerValueHistoryTimelineItem>
+      <LoggerValueHistoryTimelineItem
+         documentLocation = "file:///Users/Zaid/Desktop/Programming/PhotoTilt/PhotoTilt/PhotoTilt/EditingViewPlayground.playground#CharacterRangeLen=19053&amp;CharacterRangeLoc=142&amp;EndingColumnNumber=20&amp;EndingLineNumber=528&amp;StartingColumnNumber=0&amp;StartingLineNumber=11&amp;Timestamp=541398534.122496"
          selectedRepresentationIndex = "0"
          shouldTrackSuperviewWidth = "NO">
       </LoggerValueHistoryTimelineItem>

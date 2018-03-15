@@ -87,9 +87,6 @@ class RangeSeekSlider: UIControl {
     }
   }
   
-  /// fixes the labels above the slider controls. true: labels will be fixed to both ends. false: labels will move with the handles. Default is false.
-  var labelsFixed: Bool = false
-  
   /// The minimum distance the two selected slider values must be apart. Default is 0.
   var minDistance: CGFloat = 0.0 {
     didSet {
@@ -143,7 +140,7 @@ class RangeSeekSlider: UIControl {
   }
   
   /// Handle diameter (default 16.0)
-  var handleDiameter: CGFloat = 30.0 {
+  var handleDiameter: CGFloat = 28.0 {
     didSet {
       leftHandle.cornerRadius = handleDiameter / 2.0
       rightHandle.cornerRadius = handleDiameter / 2.0
@@ -152,11 +149,8 @@ class RangeSeekSlider: UIControl {
     }
   }
   
-  /// Selected handle diameter multiplier (default 1.7)
-  var selectedHandleDiameterMultiplier: CGFloat = 1.7
-  
   /// Set the slider line height (default 1.0)
-  var lineHeight: CGFloat = 1.0 {
+  var lineHeight: CGFloat = 2.0 {
     didSet {
       updateLineHeight()
     }
@@ -213,7 +207,7 @@ class RangeSeekSlider: UIControl {
   }
   
   open override var intrinsicContentSize: CGSize {
-    return CGSize(width: UIViewNoIntrinsicMetric, height: 31.0)
+    return CGSize(width: UIViewNoIntrinsicMetric, height: 55.0)
   }
   
   
@@ -343,7 +337,7 @@ class RangeSeekSlider: UIControl {
     return valueSubtracted / maxMinDif
   }
   
-  private func xPositionAlongLine(for value: CGFloat) -> CGFloat {
+  private func xPositionAlongLine(for value: CGFloat, handle: CALayer) -> CGFloat {
     // first get the percentage along the line for the value
     let percentage: CGFloat = percentageAlongLine(for: value)
     
@@ -353,12 +347,16 @@ class RangeSeekSlider: UIControl {
     // now multiply the percentage by the minMaxDif to see how far along the line the point should be, and add it onto the minimum x position.
     let offset: CGFloat = percentage * maxMinDif
     
-    return sliderLine.frame.minX + offset
+    if handle == leftHandle {
+      return max(handleDiameter / 2, sliderLine.frame.minX + offset)
+    } else {
+      return min(maxMinDif - (handleDiameter / 2), sliderLine.frame.minX + offset)
+    }
   }
   
   private func updateLineHeight() {
     let barSidePadding: CGFloat = 0
-    let yMiddle: CGFloat = frame.height / 2.0
+    let yMiddle: CGFloat = handleDiameter / 2
     let lineLeftSide: CGPoint = CGPoint(x: barSidePadding, y: yMiddle)
     let lineRightSide: CGPoint = CGPoint(x: frame.width - barSidePadding,
                                          y: yMiddle)
@@ -388,10 +386,10 @@ class RangeSeekSlider: UIControl {
   }
   
   private func updateHandlePositions() {
-    leftHandle.position = CGPoint(x: xPositionAlongLine(for: selectedMinValue),
+    leftHandle.position = CGPoint(x: xPositionAlongLine(for: selectedMinValue, handle: leftHandle),
                                   y: sliderLine.frame.midY)
     
-    rightHandle.position = CGPoint(x: xPositionAlongLine(for: selectedMaxValue),
+    rightHandle.position = CGPoint(x: xPositionAlongLine(for: selectedMaxValue, handle: rightHandle),
                                    y: sliderLine.frame.midY)
     
     // positioning for the dist slider line
@@ -406,11 +404,6 @@ class RangeSeekSlider: UIControl {
     
     minLabel.frame.size = minLabelTextSize
     maxLabel.frame.size = maxLabelTextSize
-    
-    if labelsFixed {
-      updateFixedLabelPositions()
-      return
-    }
     
     let minSpacingBetweenLabels: CGFloat = 8.0
     
@@ -459,9 +452,9 @@ class RangeSeekSlider: UIControl {
   }
   
   private func updateFixedLabelPositions() {
-    minLabel.position = CGPoint(x: xPositionAlongLine(for: minValue),
+    minLabel.position = CGPoint(x: xPositionAlongLine(for: minValue, handle: leftHandle),
                                 y: sliderLine.frame.minY - (minLabelTextSize.height / 2.0) - (handleDiameter / 2.0) - labelPadding)
-    maxLabel.position = CGPoint(x: xPositionAlongLine(for: maxValue),
+    maxLabel.position = CGPoint(x: xPositionAlongLine(for: maxValue, handle: rightHandle),
                                 y: sliderLine.frame.minY - (maxLabelTextSize.height / 2.0) - (handleDiameter / 2.0) - labelPadding)
     if minLabel.frame.minX < 0.0 {
       minLabel.frame.origin.x = 0.0

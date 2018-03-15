@@ -62,14 +62,10 @@ class CaptureButton: UIControl {
   
   func setActive(_ active: Bool, animated: Bool) {
     isActive = active
-    UIView.animate(withDuration: animated ? 0.5 : 0.0, animations: { [weak self] in
+    UIView.animate(withDuration: animated ? 0.3 : 0.0, animations: { [weak self] in
       guard let `self` = self else { return }
       let scale: CGFloat = active ? 0.8 : 1.0
-      let scaleTransform = CGAffineTransform.init(scaleX: scale, y: scale)
-      
-      let rotation: CGFloat = active ? .pi / 2.0 : -(.pi / 2.0)
-      let rotationTransfom = CGAffineTransform.init(rotationAngle: rotation)
-      self.centerShape.transform = scaleTransform.concatenating(rotationTransfom)
+      self.centerShape.transform = CGAffineTransform.init(scaleX: scale, y: scale)
       self.centerShape.layer.cornerRadius = self.isActive ? self.centerShape.frame.width / 5.0 : self.centerShape.frame.width / 2.0
     })
   }
