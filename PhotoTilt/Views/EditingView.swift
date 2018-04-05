@@ -14,13 +14,15 @@ class EditingView: UIView {
   
   let depthEditingControlsView = DepthEditingControlsView(initialNoise: 0.02, initialSharpness: 0.40)
   let effectEditingControlsView = EffectEditingControlsView(initialSlope: 4.0, initialWidth: 0.1)
- 
+
+
   var playerLayer: CALayer?
   
-  private let onVideoSourceToggled: (Bool) -> Void
-  private var showingVideo = true
+  private let onVideoSourceToggled: (EditingViewController.VideoSourceType) -> Void
+  private var videoSourceType: EditingViewController.VideoSourceType
   
-  init(onVideoSourceToggled: @escaping (Bool) -> Void) {
+  init(initialVideoSource: EditingViewController.VideoSourceType = .video, onVideoSourceToggled: @escaping (EditingViewController.VideoSourceType) -> Void) {
+    videoSourceType = initialVideoSource
     self.onVideoSourceToggled = onVideoSourceToggled
     super.init(frame: .zero)
     depthEditingControlsView.isHidden = true
@@ -42,9 +44,9 @@ class EditingView: UIView {
   }
   
   @objc private func toggleVideoSource() {
-    showingVideo = !showingVideo
-    toggleButton.setTitle(showingVideo ? "Show Depth Data" : "Show Video", for: .normal)
-    onVideoSourceToggled(showingVideo)
+    videoSourceType = videoSourceType.next
+    toggleButton.setTitle(videoSourceType.buttonTitle, for: .normal)
+    onVideoSourceToggled(videoSourceType)
   }
   
   private func installConstraints() {

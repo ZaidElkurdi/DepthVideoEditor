@@ -7,26 +7,50 @@
 //
 
 import AVFoundation
+import MBProgressHUD
 import UIKit
 
 class EditingViewController: UIViewController {
   enum VideoSourceType {
     case video
     case depth
+    case mask
+
+    var buttonTitle: String {
+      switch self {
+      case .video:
+        return "Show Depth Data"
+      case .depth:
+        return "Show Mask"
+      case .mask:
+        return "Show Video"
+      }
+    }
+
+    var next: VideoSourceType {
+      switch self {
+      case .video:
+        return .depth
+      case .depth:
+        return .mask
+      case .mask:
+        return .video
+      }
+    }
   }
-  
+
+  private var composition: AVVideoComposition?
   private var currentVideoSource = VideoSourceType.video
   private var selectedFilter: DepthImageFilters.FilterType = .color
   private let depthData: [CVPixelBuffer]
   private let depthDataImages: [CIImage]
-  private var transformedDepthImages: [CIImage]
-  private var exportSession: AVAssetExportSession?
+  private var transformedDepthImages: [CIImage?]
   private let videoAsset: AVAsset
-  private lazy var editingView: EditingView = EditingView(onVideoSourceToggled: { [weak self] showVideo in
+  private lazy var editingView: EditingView = EditingView(onVideoSourceToggled: { [weak self] videoSourceType in
     guard let `self` = self else { return }
-    self.currentVideoSource = showVideo ? .video : .depth
-    self.editingView.effectEditingControlsView.isHidden = !showVideo
-    self.editingView.depthEditingControlsView.isHidden = showVideo
+    self.currentVideoSource = videoSourceType
+    self.editingView.effectEditingControlsView.isHidden = videoSourceType == .depth
+    self.editingView.depthEditingControlsView.isHidden = videoSourceType != .depth
   })
   private var recordedVideo: AVPlayerItem?
   private lazy var leftSwipeRecognizer: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeRecognized))
@@ -52,6 +76,8 @@ class EditingViewController: UIViewController {
       transformedDepthData.append(CIImage.init(cvPixelBuffer: currBuffer).oriented(.right))
     }
     depthDataImages = transformedDepthData
+
+    self.transformedDepthImages = Array(repeating: nil, count: depthDataImages.count)
     
     super.init(nibName: nil, bundle: nil)
     
@@ -91,12 +117,21 @@ class EditingViewController: UIViewController {
   }
   
   @objc private func saveTapped() {
-//    exportSession = AVAssetExportSession(asset: videoAsset, presetName: AVAssetExportPresetHighestQuality)
-//    exportSession.outputFileType = AVFileTypeQuickTimeMovie
-//    exportSession.outputURL = outURL
-//    exportSession.videoComposition = composition
-//    
-//    exportSession.exportAsynchronouslyWithComplet
+    let progressHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
+    progressHUD.label.text = "Exporting..."
+
+    VideoExporter.exportAsset(videoAsset, composition: composition, exportCompletion: { [weak self] success in
+      DispatchQueue.main.async {
+        progressHUD.hide(animated: true)
+
+        if !success {
+          let errorHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
+          errorHUD.mode = .text
+          errorHUD.label.text = "Error exporting video"
+          errorHUD.hide(animated: true, afterDelay: 3.0)
+        }
+      }
+    })
   }
   
   @objc private func swipeRecognized(_ recognizer: UISwipeGestureRecognizer) {
@@ -106,9 +141,9 @@ class EditingViewController: UIViewController {
       selectedFilter = selectedFilter.prevFilter
     }
   }
-  
+
   private func playVideo() {
-    let composition = AVVideoComposition(asset: videoAsset, applyingCIFiltersWithHandler: { [weak self] request in
+    let videoComposition = AVVideoComposition(asset: videoAsset, applyingCIFiltersWithHandler: { [weak self] request in
       guard let `self` = self else { return }
       // Clamp to avoid blurring transparent pixels at the image edges
       let source = request.sourceImage.clampedToExtent()
@@ -132,16 +167,24 @@ class EditingViewController: UIViewController {
         return
       }
       
-      let mask = self.depthFilters.createMask(for: depthImage, slope: CGFloat(self.editingView.effectEditingControlsView.slopeSlider.value * 10), width: CGFloat(self.editingView.effectEditingControlsView.widthSlider.value), withMinFocus: self.editingView.effectEditingControlsView.focusSlider.selectedMinValue / 100, maxFocus: self.editingView.effectEditingControlsView.focusSlider.selectedMaxValue / 100, andScale: scale)
+      let mask = self.depthFilters.createMask(for: depthImage, slope: CGFloat(self.editingView.effectEditingControlsView.slopeSlider.value * 10), width: CGFloat(self.editingView.effectEditingControlsView.widthSlider.value), withMinFocus: self.editingView.effectEditingControlsView.focusSlider.selectedMinValue / 100, maxFocus: self.editingView.effectEditingControlsView.focusSlider.selectedMaxValue / 100, blur: CGFloat(self.editingView.effectEditingControlsView.blurSlider.value), scale: scale)
+
+      if self.currentVideoSource == .mask {
+        request.finish(with: mask, context: nil)
+        return
+      }
+
       if let filteredImage = self.transformedFrame(source, mask: mask, filter: self.selectedFilter)?.cropped(to: request.sourceImage.extent) {
         request.finish(with: filteredImage, context: nil)
       } else {
         request.finish(with: source, context: nil)
       }
     })
+
+    composition = videoComposition
     
     let recordedVideo = AVPlayerItem(asset: videoAsset)
-    recordedVideo.videoComposition = composition
+    recordedVideo.videoComposition = videoComposition
     
     let avPlayer = AVPlayer(playerItem: recordedVideo)
     

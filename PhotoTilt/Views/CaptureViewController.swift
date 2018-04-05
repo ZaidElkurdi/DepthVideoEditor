@@ -80,29 +80,29 @@ class CaptureViewController: UIViewController {
   private func focus(with focusMode: AVCaptureDevice.FocusMode, exposureMode: AVCaptureDevice.ExposureMode, at devicePoint: CGPoint, monitorSubjectAreaChange: Bool) {
     
     guard let device = self.videoDeviceInput?.device else { return }
-      do {
-        try device.lockForConfiguration()
-        
-        /*
-         Setting (focus/exposure)PointOfInterest alone does not initiate a (focus/exposure) operation.
-         Call set(Focus/Exposure)Mode() to apply the new point of interest.
-         */
-        if device.isFocusPointOfInterestSupported && device.isFocusModeSupported(focusMode) {
-          device.focusPointOfInterest = devicePoint
-          device.focusMode = focusMode
-        }
-        
-        if device.isExposurePointOfInterestSupported && device.isExposureModeSupported(exposureMode) {
-          device.exposurePointOfInterest = devicePoint
-          device.exposureMode = exposureMode
-        }
-        
-        device.isSubjectAreaChangeMonitoringEnabled = monitorSubjectAreaChange
-        device.unlockForConfiguration()
-      } catch {
-        print("Could not lock device for configuration: \(error)")
+    do {
+      try device.lockForConfiguration()
+
+      /*
+       Setting (focus/exposure)PointOfInterest alone does not initiate a (focus/exposure) operation.
+       Call set(Focus/Exposure)Mode() to apply the new point of interest.
+       */
+      if device.isFocusPointOfInterestSupported && device.isFocusModeSupported(focusMode) {
+        device.focusPointOfInterest = devicePoint
+        device.focusMode = focusMode
       }
+
+      if device.isExposurePointOfInterestSupported && device.isExposureModeSupported(exposureMode) {
+        device.exposurePointOfInterest = devicePoint
+        device.exposureMode = exposureMode
+      }
+
+      device.isSubjectAreaChangeMonitoringEnabled = monitorSubjectAreaChange
+      device.unlockForConfiguration()
+    } catch {
+      print("Could not lock device for configuration: \(error)")
     }
+  }
   
   private func configureSession() {
     let defaultVideoDevice: AVCaptureDevice? = videoDeviceDiscoverySession.devices.first
@@ -269,40 +269,62 @@ extension CaptureViewController: AVCaptureDataOutputSynchronizerDelegate, AVCapt
   }
   
   func dataOutputSynchronizer(_ synchronizer: AVCaptureDataOutputSynchronizer, didOutput synchronizedDataCollection: AVCaptureSynchronizedDataCollection) {
-        guard isRecording else { return }
+    guard isRecording else { return }
     
-    guard let syncedVideoData: AVCaptureSynchronizedSampleBufferData = synchronizedDataCollection.synchronizedData(for: videoDataOutput) as? AVCaptureSynchronizedSampleBufferData, !syncedVideoData.sampleBufferWasDropped else { return }
+    guard let syncedVideoData: AVCaptureSynchronizedSampleBufferData = synchronizedDataCollection.synchronizedData(for: videoDataOutput) as? AVCaptureSynchronizedSampleBufferData else {
+      return
+    }
+
+    guard !syncedVideoData.sampleBufferWasDropped else {
+      let droppedReason = syncedVideoData.droppedReason
+      switch droppedReason {
+      case .discontinuity:
+        print("discont")
+      case .lateData:
+        print("late")
+      case .outOfBuffers:
+        print("Out of buffers")
+      case .none:
+        print("none")
+      }
+      print("Dropping sample buffer")
+      return
+    }
     
     let videoSampleBuffer = syncedVideoData.sampleBuffer
-    if let syncedDepthData: AVCaptureSynchronizedDepthData = synchronizedDataCollection.synchronizedData(for: depthDataOutput) as? AVCaptureSynchronizedDepthData, !syncedDepthData.depthDataWasDropped {
-      let convertedDepthData = syncedDepthData.depthData.converting(toDepthDataType: kCVPixelFormatType_DisparityFloat32).depthDataMap
-      convertedDepthData.normalize()
-      
-      let pixelBuffer = convertedDepthData
-      
-      CVPixelBufferLockBaseAddress(pixelBuffer, CVPixelBufferLockFlags(rawValue: 0))
-      let bufferWidth = CVPixelBufferGetWidth(pixelBuffer)
-      let bufferHeight = CVPixelBufferGetHeight(pixelBuffer)
-      let bytesPerRow = CVPixelBufferGetBytesPerRow(pixelBuffer)
-      let baseAddress = CVPixelBufferGetBaseAddress(pixelBuffer)
-      
-      // Copy the pixel buffer
-      var pixelBufferCopy: CVPixelBuffer? = nil
-      let status = CVPixelBufferCreate(kCFAllocatorDefault, bufferWidth, bufferHeight, kCVPixelFormatType_DisparityFloat32, nil, &pixelBufferCopy);
-      if let pixelBufferCopy = pixelBufferCopy {
-        CVPixelBufferLockBaseAddress(pixelBufferCopy, CVPixelBufferLockFlags(rawValue: 0))
-        let copyBaseAddress = CVPixelBufferGetBaseAddress(pixelBufferCopy)
-        memcpy(copyBaseAddress, baseAddress, bufferHeight * bytesPerRow)
-        CVPixelBufferUnlockBaseAddress(pixelBufferCopy, CVPixelBufferLockFlags(rawValue: 0))
-        CVPixelBufferUnlockBaseAddress(pixelBuffer, CVPixelBufferLockFlags(rawValue: 0))
-        
-        depthDataBuffer.append(pixelBufferCopy)
-        if !processVideo(sampleBuffer: videoSampleBuffer) {
-          let _ = depthDataBuffer.popLast()
-          frameNumber -= 1
-        }
+    guard let syncedDepthData: AVCaptureSynchronizedDepthData = synchronizedDataCollection.synchronizedData(for: depthDataOutput) as? AVCaptureSynchronizedDepthData, !syncedDepthData.depthDataWasDropped else {
+      print("Dropped depth data")
+      return
+    }
+
+    let convertedDepthData = syncedDepthData.depthData.converting(toDepthDataType: kCVPixelFormatType_DisparityFloat32).depthDataMap
+    convertedDepthData.normalize()
+
+    let pixelBuffer = convertedDepthData
+
+    CVPixelBufferLockBaseAddress(pixelBuffer, CVPixelBufferLockFlags(rawValue: 0))
+    let bufferWidth = CVPixelBufferGetWidth(pixelBuffer)
+    let bufferHeight = CVPixelBufferGetHeight(pixelBuffer)
+    let bytesPerRow = CVPixelBufferGetBytesPerRow(pixelBuffer)
+    let baseAddress = CVPixelBufferGetBaseAddress(pixelBuffer)
+
+    // Copy the pixel buffer
+    var pixelBufferCopy: CVPixelBuffer? = nil
+    let status = CVPixelBufferCreate(kCFAllocatorDefault, bufferWidth, bufferHeight, kCVPixelFormatType_DisparityFloat32, nil, &pixelBufferCopy);
+    if let pixelBufferCopy = pixelBufferCopy {
+      CVPixelBufferLockBaseAddress(pixelBufferCopy, CVPixelBufferLockFlags(rawValue: 0))
+      let copyBaseAddress = CVPixelBufferGetBaseAddress(pixelBufferCopy)
+      memcpy(copyBaseAddress, baseAddress, bufferHeight * bytesPerRow)
+      CVPixelBufferUnlockBaseAddress(pixelBufferCopy, CVPixelBufferLockFlags(rawValue: 0))
+
+      depthDataBuffer.append(pixelBufferCopy)
+      if !processVideo(sampleBuffer: videoSampleBuffer) {
+        print("Dropping frame")
+        let _ = depthDataBuffer.popLast()
+        frameNumber -= 1
       }
     }
+    CVPixelBufferUnlockBaseAddress(pixelBuffer, CVPixelBufferLockFlags(rawValue: 0))
   }
 }
 

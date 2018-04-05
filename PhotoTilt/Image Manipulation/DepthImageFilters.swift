@@ -64,7 +64,7 @@ class DepthImageFilters {
     context = CIContext()
   }
   
-  func createMask(for depthImage: CIImage, slope: CGFloat, width: CGFloat, withMinFocus minFocus: CGFloat, maxFocus: CGFloat, andScale scale: CGFloat) -> CIImage {
+  func createMask(for depthImage: CIImage, slope: CGFloat, width: CGFloat, withMinFocus minFocus: CGFloat, maxFocus: CGFloat, blur: CGFloat, scale: CGFloat) -> CIImage {
     
     let s1 = slope
     let s2 = -slope
@@ -90,7 +90,7 @@ class DepthImageFilters {
     
     let combinedMask = mask0.applyingFilter("CIDarkenBlendMode", parameters: ["inputBackgroundImage" : mask1])
 
-    let mask = combinedMask.applyingFilter("CIBicubicScaleTransform", parameters: ["inputScale": scale])
+    let mask = combinedMask.applyingFilter("CIBicubicScaleTransform", parameters: ["inputScale": scale]).applyingGaussianBlur(sigma: Double(blur))
     
     return mask
   }

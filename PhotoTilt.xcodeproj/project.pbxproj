@@ -27,6 +27,7 @@
 		B83CF11B2033AD2C00B68AE4 /* CaptureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83CF11A2033AD2C00B68AE4 /* CaptureView.swift */; };
 		B83CF11D2033B1CF00B68AE4 /* FilterRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83CF11C2033B1CF00B68AE4 /* FilterRenderer.swift */; };
 		B8918BD22033F0AB00289800 /* EditingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8918BD12033F0AB00289800 /* EditingViewController.swift */; };
+		B8AF1E9D205C553C00811363 /* CaptureToEditorTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AF1E9C205C553C00811363 /* CaptureToEditorTransition.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		B83CF11C2033B1CF00B68AE4 /* FilterRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterRenderer.swift; sourceTree = "<group>"; };
 		B83CF11E2033B1F400B68AE4 /* PhotoTilt-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PhotoTilt-Bridging-Header.h"; sourceTree = "<group>"; };
 		B8918BD12033F0AB00289800 /* EditingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingViewController.swift; sourceTree = "<group>"; };
+		B8AF1E9C205C553C00811363 /* CaptureToEditorTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureToEditorTransition.swift; sourceTree = "<group>"; };
 		EDBFD36D51FE19FEDD87E8D5 /* Pods-PhotoTilt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoTilt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PhotoTilt/Pods-PhotoTilt.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -151,6 +153,7 @@
 		B83CF101202EBACC00B68AE4 /* PhotoTilt */ = {
 			isa = PBXGroup;
 			children = (
+				B8AF1E9B205C552300811363 /* Animation */,
 				B82B0EF520452A010014BE72 /* Utility */,
 				B82B0EF4204528B90014BE72 /* Views */,
 				B82533D7203BC0A1001685C4 /* Image Manipulation */,
@@ -162,6 +165,14 @@
 				B83CF11E2033B1F400B68AE4 /* PhotoTilt-Bridging-Header.h */,
 			);
 			path = PhotoTilt;
+			sourceTree = "<group>";
+		};
+		B8AF1E9B205C552300811363 /* Animation */ = {
+			isa = PBXGroup;
+			children = (
+				B8AF1E9C205C553C00811363 /* CaptureToEditorTransition.swift */,
+			);
+			path = Animation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -250,7 +261,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		69E0FF312B16DFC717019B11 /* [CP] Embed Pods Frameworks */ = {
@@ -306,6 +317,7 @@
 				B82B0EF720452A0D0014BE72 /* VideoExporter.swift in Sources */,
 				B82B0EEF2044EAF40014BE72 /* EffectEditingControlsView.swift in Sources */,
 				B81440452043B60F00EDB3EB /* EditingView.swift in Sources */,
+				B8AF1E9D205C553C00811363 /* CaptureToEditorTransition.swift in Sources */,
 				B81440432042530300EDB3EB /* RangeSeekSlider.swift in Sources */,
 				B83CF103202EBACC00B68AE4 /* AppDelegate.swift in Sources */,
 				B82533D9203BC12B001685C4 /* DepthImageFilters.swift in Sources */,
